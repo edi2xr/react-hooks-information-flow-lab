@@ -8,10 +8,8 @@ function ShoppingList({ items }) {
     setSelectedCategory(event.target.value);
   }
 
-  const itemsToDisplay = items.filter((item) => {
-    if (selectedCategory === "All") return true;
-
-    return item.category === selectedCategory;
+  const visibleItems = items.filter((item) => {
+    return selectedCategory === "All" || item.category === selectedCategory;
   });
 
   return (
@@ -25,7 +23,7 @@ function ShoppingList({ items }) {
         </select>
       </div>
       <ul className="Items">
-        {itemsToDisplay.map((item) => (
+        {visibleItems.map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />
         ))}
       </ul>
